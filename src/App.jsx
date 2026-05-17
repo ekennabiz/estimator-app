@@ -14,6 +14,7 @@ import EquipmentSection from "./components/EquipmentSection";
 import DeliverySection from "./components/DeliverySection";
 import ChargesSection from "./components/ChargesSection";
 import SettingsSection from "./components/SettingsSection";
+import AiPanel from "./components/AiPanel";
 
 
 import CollapsibleSection from "./components/CollapsibleSection";
@@ -28,11 +29,17 @@ function App() {
   const [materials, setMaterials] = useState([]);
   const [labor, setLabor] = useState([]);
   const [equipment, setEquipment] = useState([]);
-  const [subcontractors] = useState([]);
+  const [subcontractors, setSubcontractors] = useState([]);
 
   const [delivery, setDelivery] = useState({});
   const [charges, setCharges] = useState({});
-  const [settings, setSettings] = useState({});
+  const [settings, setSettings] = useState({
+  overheadPct: 10,
+  profitPct: 20,
+  taxRate: 0,
+  discountType: "percent",
+  discountValue: 0,
+});;
 
   const [estimates, setEstimates] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -40,14 +47,15 @@ function App() {
   // ================= SAVE =================
   const saveEstimate = () => {
     const data = {
-      project,
-      materials,
-      labor,
-      equipment,
-      delivery,
-      charges,
-      settings,
-    };
+  project,
+  materials,
+  labor,
+  equipment,
+  subcontractors,
+  delivery,
+  charges,
+  settings,
+};
 
     const updated = [...estimates, data];
     setEstimates(updated);
@@ -127,6 +135,8 @@ function App() {
             <SettingsSection settings={settings} setSettings={setSettings} />
           </CollapsibleSection>
 
+          
+
           <button onClick={saveEstimate}>Save Estimate</button>
         </div>
       </div>
@@ -134,6 +144,7 @@ function App() {
       {/* RIGHT */}
       <div className="app-right">
         <SummarySection totals={totals} />
+        <AiPanel project={project} totals={totals} />
       </div>
 
     </div>
