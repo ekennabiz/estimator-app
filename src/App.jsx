@@ -16,7 +16,6 @@ import ChargesSection from "./components/ChargesSection";
 import SettingsSection from "./components/SettingsSection";
 import AiPanel from "./components/AiPanel";
 
-
 import CollapsibleSection from "./components/CollapsibleSection";
 
 import { calculateTotals } from "./utils/calculations";
@@ -34,12 +33,12 @@ function App() {
   const [delivery, setDelivery] = useState({});
   const [charges, setCharges] = useState({});
   const [settings, setSettings] = useState({
-  overheadPct: 10,
-  profitPct: 20,
-  taxRate: 0,
-  discountType: "percent",
-  discountValue: 0,
-});;
+    overheadPct: 10,
+    profitPct: 20,
+    taxRate: 0,
+    discountType: "percent",
+    discountValue: 0,
+  });
 
   const [estimates, setEstimates] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -47,15 +46,15 @@ function App() {
   // ================= SAVE =================
   const saveEstimate = () => {
     const data = {
-  project,
-  materials,
-  labor,
-  equipment,
-  subcontractors,
-  delivery,
-  charges,
-  settings,
-};
+      project,
+      materials,
+      labor,
+      equipment,
+      subcontractors,
+      delivery,
+      charges,
+      settings,
+    };
 
     const updated = [...estimates, data];
     setEstimates(updated);
@@ -91,12 +90,20 @@ function App() {
       settings,
       project,
     });
-  }, [materials, labor, equipment, subcontractors, delivery, charges, settings, project]);
+  }, [
+    materials,
+    labor,
+    equipment,
+    subcontractors,
+    delivery,
+    charges,
+    settings,
+    project,
+  ]);
 
   // ================= UI =================
   return (
     <div className="app-layout">
-
       {/* LEFT */}
       <Sidebar />
 
@@ -106,13 +113,15 @@ function App() {
         <StatsBar totals={totals} />
 
         <div className="app-content">
-
           <CollapsibleSection title="Project">
             <ProjectInfo project={project} setProject={setProject} />
           </CollapsibleSection>
 
           <CollapsibleSection title="Materials">
-            <MaterialsSection materials={materials} setMaterials={setMaterials} />
+            <MaterialsSection
+              materials={materials}
+              setMaterials={setMaterials}
+            />
           </CollapsibleSection>
 
           <CollapsibleSection title="Labor">
@@ -120,7 +129,10 @@ function App() {
           </CollapsibleSection>
 
           <CollapsibleSection title="Equipment">
-            <EquipmentSection equipment={equipment} setEquipment={setEquipment} />
+            <EquipmentSection
+              equipment={equipment}
+              setEquipment={setEquipment}
+            />
           </CollapsibleSection>
 
           <CollapsibleSection title="Delivery">
@@ -135,8 +147,6 @@ function App() {
             <SettingsSection settings={settings} setSettings={setSettings} />
           </CollapsibleSection>
 
-          
-
           <button onClick={saveEstimate}>Save Estimate</button>
         </div>
       </div>
@@ -146,7 +156,6 @@ function App() {
         <SummarySection totals={totals} />
         <AiPanel project={project} totals={totals} />
       </div>
-
     </div>
   );
 }
