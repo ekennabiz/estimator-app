@@ -745,8 +745,17 @@ body.dark th {
   }
 
   .sidebar {
-    width: 100%;
-  }
+  width: 100%;
+
+  height: auto;
+
+  position: relative;
+
+  border-right: none;
+
+  border-bottom:
+    1px solid rgba(255,255,255,0.05);
+}
 
   .stats-grid {
     grid-template-columns: 1fr;
